@@ -1,3 +1,18 @@
+SeoCoreBundle:
+    resource: "@SeoCoreBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+SeoPageBundle:
+    resource: "@SeoPageBundle/Controller/"
+    type:     annotation
+    prefix:   /page
+
+SeoUserBundle:
+    resource: "@SeoUserBundle/Controller/"
+    type:     annotation
+    prefix:   /user
+
 # Internal routing configuration to handle ESI
 #_internal:
 #   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
