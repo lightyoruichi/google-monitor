@@ -48,12 +48,12 @@ doctrine:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
 
-# Swiftmailer Configuration
 swiftmailer:
     transport: %mailer_transport%
     host:      %mailer_host%
     username:  %mailer_user%
     password:  %mailer_password%
+    port:      %mailer_port%
 
 jms_security_extra:
     secure_controllers:  true
@@ -69,3 +69,9 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Seo\Bundle\UserBundle\Entity\User
+    group:
+        group_class: Seo\Bundle\UserBundle\Entity\Group
+    registration:
+        confirmation:
+            enabled:    true
+            template:   FOSUserBundle:Registration:email.txt.twig

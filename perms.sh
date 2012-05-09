@@ -1,3 +1,4 @@
+# mac version
 rm -rf app/cache/*
 rm -rf app/logs/*
 
