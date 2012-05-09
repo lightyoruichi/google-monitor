@@ -1,0 +1,20 @@
+{% extends 'SeoCoreBundle::layout.html.twig' %}
+
+{% block container %}
+<h1 class="page-header">Edit page</h1>
+
+<form action="{{ path('page_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    {{ form_widget(edit_form) }}
+    <p class="form-actions">
+        <button type="submit" class="btn btn-success">
+            Save
+        </button>
+        <a href="{{ path('pages') }}" class="btn">
+            Back to the list
+        </a>
+        <a href="{{ path('page_delete', { 'id': entity.id }) }}" class="btn btn-danger">
+            Delete
+        </a>
+    </p>
+</form>
+{% endblock %}

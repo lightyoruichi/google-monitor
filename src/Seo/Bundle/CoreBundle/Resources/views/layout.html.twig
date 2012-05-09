@@ -13,10 +13,10 @@
 
             <div class="nav-collapse">
                 <ul class="nav">
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">My Sites</a></li>
-                    <li><a href="#">Add new Site</a></li>
-                    <li><a href="#">My account</a></li>
+                    <li><a href="{{ path('dashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ path('pages') }}">My Sites</a></li>
+                    <li><a href="{{ path('page_new') }}">Add new Site</a></li>
+                    <li><a href="{{ path('fos_user_profile_show') }}">My account</a></li>
                 </ul>
             </div>
             <!--/.nav-collapse -->

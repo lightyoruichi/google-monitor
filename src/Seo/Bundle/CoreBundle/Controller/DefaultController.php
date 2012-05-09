@@ -9,10 +9,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/welcome")
+     * @Route("/dashboard", name="dashboard")
      * @Template
      */
-    public function welcomeAction()
+    public function dashboardAction()
     {
         return array();
     }

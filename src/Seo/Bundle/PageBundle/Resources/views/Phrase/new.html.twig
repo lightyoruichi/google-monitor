@@ -1,0 +1,12 @@
+{% extends 'SeoCoreBundle::layout.html.twig' %}
+
+{% block container %}
+<h1 class="page-header">Add a phrase</h1>
+
+<form action="{{ path('phrase_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit" class="btn">Create</button>
+    </p>
+</form>
+{% endblock %}

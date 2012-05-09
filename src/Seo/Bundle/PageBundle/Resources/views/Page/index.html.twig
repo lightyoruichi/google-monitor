@@ -1,0 +1,40 @@
+{% extends 'SeoCoreBundle::layout.html.twig' %}
+
+{% block container %}
+<h1 class="page-header">My pages</h1>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>active?</th>
+        <th>url</th>
+        <th>title</th>
+        <th>date added</th>
+        <th>date edited</th>
+        <th>actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+    <tr>
+        <td>{{ entity.isactive }}</td>
+        <td><a href="{{ path('page_show', { 'id': entity.id }) }}">{{ entity.url }}</a></td>
+        <td>{{ entity.title }}</td>
+        <td>{{ entity.description }}</td>
+        <td>{% if entity.createdat %}{{ entity.createdat|date('Y-m-d H:i:s') }}{% endif %}</td>
+        <td>{% if entity.updatedat %}{{ entity.updatedat|date('Y-m-d H:i:s') }}{% endif %}</td>
+        <td>
+            <a href="{{ path('page_show', { 'id': entity.id }) }}">show</a>
+            <a href="{{ path('page_edit', { 'id': entity.id }) }}">edit</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div class="form-actions">
+    <a href="{{ path('page_new') }}" class="btn">
+        <i class="icon-plus"></i> Add a new page
+    </a>
+</div>
+{% endblock %}

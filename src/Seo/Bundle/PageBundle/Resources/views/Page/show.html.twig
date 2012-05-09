@@ -1,0 +1,53 @@
+{% extends 'SeoCoreBundle::layout.html.twig' %}
+
+{% block container %}
+<h1 class="page-header">{{ entity.url }}</h1>
+
+<table class="table table-bordered table-condensed">
+    <tbody>
+    <tr>
+        <th>active?</th>
+        <td>{{ entity.isactive }}</td>
+    </tr>
+    <tr>
+        <th>url</th>
+        <td>{{ entity.url }}</td>
+    </tr>
+    <tr>
+        <th>title</th>
+        <td>{{ entity.title }}</td>
+    </tr>
+    <tr>
+        <th>description</th>
+        <td>{{ entity.description }}</td>
+    </tr>
+    <tr>
+        <th>date created</th>
+        <td>{{ entity.createdat|date('Y-m-d H:i:s') }}</td>
+    </tr>
+    <tr>
+        <th>date edited</th>
+        <td>{{ entity.updatedat|date('Y-m-d H:i:s') }}</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Phrases:</h2>
+<ul>
+    {% for phrase in entity.phrases %}
+    <li><a href="{{ path('phrase_show', { 'id' : phrase.id }) }}">{{ phrase.phrase }}</a></li>
+    {% endfor %}
+</ul>
+
+<p class="btn-group">
+    <a href="{{ path('pages') }}" class="btn">
+        List
+    </a>
+    <a href="{{ path('page_edit', { 'id': entity.id }) }}" class="btn">
+        Edit
+    </a>
+    <a href="{{ path('page_delete', { 'id': entity.id }) }}" class="btn">
+        Delete
+    </a>
+</p>
+{% endblock %}

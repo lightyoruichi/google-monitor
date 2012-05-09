@@ -72,8 +72,6 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Seo\Bundle\UserBundle\Entity\User
-    group:
-        group_class: Seo\Bundle\UserBundle\Entity\Group
     registration:
         confirmation:
             enabled:    false

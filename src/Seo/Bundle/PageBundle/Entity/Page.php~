@@ -3,11 +3,12 @@
 namespace Seo\Bundle\PageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Seo\Bundle\PageBundle\Entity\Page
  *
- * @ORM\Table()
+ * @ORM\Table(name="pages")
  * @ORM\Entity
  */
 class Page
@@ -19,50 +20,71 @@ class Page
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
-     * @var string $url
+     * @var \Seo\Bundle\UserBundle\Entity\User $user;
      *
-     * @ORM\Column(name="url", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Seo\Bundle\UserBundle\Entity\User", inversedBy="pages")
      */
-    private $url;
+    protected $user;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection() $phrases;
+     *
+     * @ORM\OneToMany(targetEntity="Phrase", mappedBy="page")
+     */
+    protected $phrases;
 
     /**
      * @var boolean $is_active
      *
-     * @ORM\Column(name="is_active", type="boolean")
+     * @ORM\Column(type="boolean")
      */
-    private $is_active;
+    protected $is_active;
 
     /**
-     * @var \Seo\Bundle\UserBundle\Entity\User $user
+     * @var string $url
      *
-     * @ORM\ManyToOne(targetEntity="Seo\Bundle\UserBundle\Entity\User")
+     * @ORM\Column(type="string")
      */
-    private $user;
+    protected $url;
 
     /**
      * @var string $title
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(type="string")
      */
-    private $title;
+    protected $title;
+
+    /**
+     * @var string $description
+     *
+     * @ORM\Column(type="string", length=510)
+     */
+    protected $description;
 
     /**
      * @var datetime $created_at
      *
-     * @ORM\Column(name="created_at", type="datetime")
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    protected $created_at;
 
     /**
      * @var datetime $updated_at
      *
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
-    private $updated_at;
+    protected $updated_at;
 
+    public function __construct()
+    {
+        $this->phrases = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -71,26 +93,6 @@ class Page
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set url
-     *
-     * @param string $url
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-    }
-
-    /**
-     * Get url
-     *
-     * @return string 
-     */
-    public function getUrl()
-    {
-        return $this->url;
     }
 
     /**
@@ -114,6 +116,26 @@ class Page
     }
 
     /**
+     * Set url
+     *
+     * @param string $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string 
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
      * Set title
      *
      * @param string $title
@@ -131,6 +153,26 @@ class Page
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**
@@ -174,22 +216,22 @@ class Page
     }
 
     /**
-     * Set user
+     * Add phrases
      *
-     * @param \Seo\Bundle\UserBundle\User $user
+     * @param Seo\Bundle\PageBundle\Entity\Phrase $phrases
      */
-    public function setUser(\Seo\Bundle\UserBundle\User $user)
+    public function addPhrase(\Seo\Bundle\PageBundle\Entity\Phrase $phrases)
     {
-        $this->user = $user;
+        $this->phrases[] = $phrases;
     }
 
     /**
-     * Get user
+     * Get phrases
      *
-     * @return \Seo\Bundle\UserBundle\User
+     * @return Doctrine\Common\Collections\Collection 
      */
-    public function getUser()
+    public function getPhrases()
     {
-        return $this->user;
+        return $this->phrases;
     }
 }
