@@ -1,39 +1,47 @@
 <?php
 
-namespace Seo\Bundle\UserBundle\Entity;
+namespace Seo\Bundle\PageBundle\Entity;
 
-use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * Seo\Bundle\PhraseBundle\Entity\Phrase
+ *
+ * @ORM\Table(name="phrases")
  * @ORM\Entity
- * @ORM\Table(name="users")
  */
-class User extends BaseUser
+class Phrase
 {
     /**
      * @var integer $id
      *
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Group")
-     * @ORM\JoinTable(name="user_group",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
-     * )
+     * @var Page $page;
+     *
+     * @ORM\ManyToOne(targetEntity="Page", inversedBy="phrases")
      */
-    protected $groups;
+    protected $page;
 
     /**
-     * @ORM\OneToMany(targetEntity="Seo\Bundle\PageBundle\Entity\Page", mappedBy="user")
+     * @var boolean $is_active
+     *
+     * @ORM\Column(type="boolean")
      */
-    protected $pages;
+    protected $is_active;
+
+    /**
+     * @var string $phrase
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $phrase;
 
     /**
      * @var datetime $created_at

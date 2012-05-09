@@ -20,6 +20,9 @@ framework:
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    form:
+        resources:
+            - 'SeoCoreBundle:Form:vertical.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -73,5 +76,5 @@ fos_user:
         group_class: Seo\Bundle\UserBundle\Entity\Group
     registration:
         confirmation:
-            enabled:    true
+            enabled:    false
             template:   FOSUserBundle:Registration:email.txt.twig

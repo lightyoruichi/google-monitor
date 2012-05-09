@@ -1,0 +1,27 @@
+{% use 'form_div_layout.html.twig' with field_label as base_field_label %}
+{% use 'form_div_layout.html.twig' with field_widget as base_field_widget %}
+
+{% block field_row %}
+<div class="control-group{% if errors|length > 0 %} error{% endif %}">
+    {{ form_label(form) }}
+    {{ form_errors(form) }}
+    {{ form_widget(form, { 'attr' : {'class':'span11'} }) }}
+</div>
+{% endblock field_row %}
+
+{% block field_widget %}
+{{ block('base_field_widget') }}
+{% if help is defined %}
+<p class="help-block">{ help }}</p>
+{% endif %}
+{% endblock %}
+
+{% block field_errors %}
+{% spaceless %}
+{% if errors|length > 0 %}
+{% for error in errors %}
+<p class="help-block">{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</p>
+{% endfor %}
+{% endif %}
+{% endspaceless %}
+{% endblock field_errors %}
