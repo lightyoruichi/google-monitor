@@ -12,7 +12,6 @@ class PhraseType extends AbstractType
         $builder
             ->add('is_active')
             ->add('phrase')
-            ->add('page')
         ;
     }
 
