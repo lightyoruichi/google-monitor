@@ -60,9 +60,16 @@ class Phrase
     protected $updated_at;
 
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection() $positions;
+     *
+     * @ORM\OneToMany(targetEntity="Seo\Bundle\PositionBundle\Entity\Position", mappedBy="phrase")
+     */
+    protected $positions;
+
+    /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -82,7 +89,7 @@ class Phrase
     /**
      * Get is_active
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsActive()
     {
@@ -102,7 +109,7 @@ class Phrase
     /**
      * Get phrase
      *
-     * @return string 
+     * @return string
      */
     public function getPhrase()
     {
@@ -122,7 +129,7 @@ class Phrase
     /**
      * Get created_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreatedAt()
     {
@@ -142,7 +149,7 @@ class Phrase
     /**
      * Get updated_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getUpdatedAt()
     {
@@ -162,10 +169,35 @@ class Phrase
     /**
      * Get page
      *
-     * @return Seo\Bundle\PageBundle\Entity\Page 
+     * @return Seo\Bundle\PageBundle\Entity\Page
      */
     public function getPage()
     {
         return $this->page;
+    }
+
+    public function __construct()
+    {
+        $this->positions = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add positions
+     *
+     * @param Seo\Bundle\PositionBundle\Entity\Position $positions
+     */
+    public function addPosition(\Seo\Bundle\PositionBundle\Entity\Position $positions)
+    {
+        $this->positions[] = $positions;
+    }
+
+    /**
+     * Get positions
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getPositions()
+    {
+        return $this->positions;
     }
 }

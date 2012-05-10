@@ -89,11 +89,11 @@ class Page
     {
         return $this->getUrl();
     }
-    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -113,7 +113,7 @@ class Page
     /**
      * Get is_active
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsActive()
     {
@@ -133,7 +133,7 @@ class Page
     /**
      * Get url
      *
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {
@@ -153,7 +153,7 @@ class Page
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -173,7 +173,7 @@ class Page
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -193,7 +193,7 @@ class Page
     /**
      * Get created_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreatedAt()
     {
@@ -213,7 +213,7 @@ class Page
     /**
      * Get updated_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getUpdatedAt()
     {
@@ -233,7 +233,7 @@ class Page
     /**
      * Get phrases
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getPhrases()
     {
@@ -253,7 +253,7 @@ class Page
     /**
      * Get user
      *
-     * @return Seo\Bundle\UserBundle\Entity\User 
+     * @return Seo\Bundle\UserBundle\Entity\User
      */
     public function getUser()
     {

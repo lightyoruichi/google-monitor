@@ -60,6 +60,13 @@ class Phrase
     protected $updated_at;
 
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection() $positions;
+     *
+     * @ORM\OneToMany(targetEntity="Seo\Bundle\PositionBundle\Entity\Position", mappedBy="phrase")
+     */
+    protected $positions;
+
+    /**
      * Get id
      *
      * @return integer 

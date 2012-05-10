@@ -84,6 +84,11 @@ class Page
     {
         $this->phrases = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
+    public function __toString()
+    {
+        return $this->getUrl();
+    }
     
     /**
      * Get id
@@ -233,5 +238,25 @@ class Page
     public function getPhrases()
     {
         return $this->phrases;
+    }
+
+    /**
+     * Set user
+     *
+     * @param Seo\Bundle\UserBundle\Entity\User $user
+     */
+    public function setUser(\Seo\Bundle\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * Get user
+     *
+     * @return Seo\Bundle\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

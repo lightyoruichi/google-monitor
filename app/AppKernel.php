@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Seo\Bundle\UserBundle\SeoUserBundle(),
             new Seo\Bundle\PageBundle\SeoPageBundle(),
             new Seo\Bundle\CoreBundle\SeoCoreBundle(),
+            new Seo\Bundle\PositionBundle\SeoPositionBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

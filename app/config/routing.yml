@@ -1,3 +1,8 @@
+SeoPositionBundle:
+    resource: "@SeoPositionBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 SeoCoreBundle:
     resource: "@SeoCoreBundle/Controller/"
     type:     annotation
