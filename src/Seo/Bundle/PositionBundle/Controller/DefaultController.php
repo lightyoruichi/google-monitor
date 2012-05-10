@@ -69,6 +69,18 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/test")
+     */
+    public function test()
+    {
+        $browser = new \Seo\Component\Browser\Browser();
+        $browser->request('GET','http://www.supremumseo.pl');
+
+        $response = $browser->getResponse();
+        return new \Symfony\Component\HttpFoundation\Response($response->getContent());
+    }
+
+    /**
      * @Route("/position/getTestData")
      */
     public function getTestDataAction()
