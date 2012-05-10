@@ -12,14 +12,14 @@ use Seo\Bundle\PageBundle\Form\PhraseType;
 /**
  * Phrase controller.
  *
- * @Route("/phrase")
+ * @Route("")
  */
 class PhraseController extends Controller
 {
     /**
      * Finds and displays a Phrase entity.
      *
-     * @Route("/{id}/show", name="phrase_show")
+     * @Route("/phrase/{id}/show", name="phrase_show")
      * @Template()
      */
     public function showAction($id)
@@ -40,16 +40,18 @@ class PhraseController extends Controller
     /**
      * Displays a form to create a new Phrase entity.
      *
-     * @Route("/new", name="phrase_new")
+     * @Route("/page/{page_id}/phrase/add", name="phrase_new")
      * @Template()
      */
-    public function newAction()
+    public function newAction($page_id)
     {
-        $entity = new Phrase();
-        $form = $this->createForm(new PhraseType(), $entity);
+        $phrase = new Phrase();
+
+        $form = $this->createForm(new PhraseType(), $phrase);
 
         return array(
-            'entity' => $entity,
+            'entity' => $phrase,
+            'page_id' => $page_id,
             'form' => $form->createView()
         );
     }
@@ -57,28 +59,35 @@ class PhraseController extends Controller
     /**
      * Creates a new Phrase entity.
      *
-     * @Route("/create", name="phrase_create")
+     * @Route("/page/{page_id}/phrase/create", name="phrase_create")
      * @Method("post")
      * @Template("SeoPageBundle:Phrase:new.html.twig")
      */
-    public function createAction()
+    public function createAction($page_id)
     {
-        $entity = new Phrase();
+        $em = $this->getDoctrine()->getEntityManager();
+        $page = $em->getRepository('SeoPageBundle:Page')->find($page_id);
+
+        if (!$page) {
+            throw $this->createNotFoundException('Unable to find Page entity.');
+        }
+
+        $phrase = new Phrase();
+        $phrase->setPage($page);
+
         $request = $this->getRequest();
-        $form = $this->createForm(new PhraseType(), $entity);
+        $form = $this->createForm(new PhraseType(), $phrase);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($entity);
+            $em->persist($phrase);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('phrase_show', array('id' => $entity->getId())));
-
+            return $this->redirect($this->generateUrl('phrase_show', array('id' => $phrase->getId())));
         }
 
         return array(
-            'entity' => $entity,
+            'entity' => $phrase,
             'form' => $form->createView()
         );
     }
@@ -86,7 +95,7 @@ class PhraseController extends Controller
     /**
      * Deletes a Phrase entity.
      *
-     * @Route("/{id}/delete", name="phrase_delete")
+     * @Route("/phrase/{id}/delete", name="phrase_delete")
      * @Method("post")
      */
     public function deleteAction($id)

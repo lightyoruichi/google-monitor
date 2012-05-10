@@ -87,7 +87,7 @@ class Position
     /**
      * Get created_at
      *
-     * @return datetime
+     * @return DateTime
      */
     public function getCreatedAt()
     {
@@ -97,9 +97,9 @@ class Position
     /**
      * Set phrase
      *
-     * @param Seo\Bundle\PositionBundle\Entity\Phrase $phrase
+     * @param Seo\Bundle\PageBundle\Entity\Phrase $phrase
      */
-    public function setPhrase(\Seo\Bundle\PositionBundle\Entity\Phrase $phrase)
+    public function setPhrase(\Seo\Bundle\PageBundle\Entity\Phrase $phrase)
     {
         $this->phrase = $phrase;
     }
@@ -107,7 +107,7 @@ class Position
     /**
      * Get phrase
      *
-     * @return Seo\Bundle\PositionBundle\Entity\Phrase
+     * @return Seo\Bundle\PageBundle\Entity\Phrase
      */
     public function getPhrase()
     {

@@ -3,7 +3,7 @@
 {% block container %}
 <h1 class="page-header">Add a phrase</h1>
 
-<form action="{{ path('phrase_create') }}" method="post" {{ form_enctype(form) }}>
+<form action="{{ path('phrase_create' , { 'page_id' : page_id }) }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
     <p>
         <button type="submit" class="btn">Create</button>
