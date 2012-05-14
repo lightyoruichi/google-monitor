@@ -30,12 +30,12 @@ class Position
     protected $position;
 
     /**
-     * @var datetime $created_at
+     * @var datetime $checked_at
      *
      * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created_at", type="datetime")
+     * @ORM\Column(name="checked_at", type="datetime")
      */
-    protected $created_at;
+    protected $checked_at;
 
     /**
      * @var \Seo\Bundle\PageBundle\Entity\Phrase $phrase;
@@ -75,23 +75,23 @@ class Position
     }
 
     /**
-     * Set created_at
+     * Set checked_at
      *
-     * @param datetime $createdAt
+     * @param datetime $checkedAt
      */
-    public function setCreatedAt($createdAt)
+    public function setCheckedAt($checkedAt)
     {
-        $this->created_at = $createdAt;
+        $this->checked_at = $checkedAt;
     }
 
     /**
-     * Get created_at
+     * Get checked_at
      *
      * @return DateTime
      */
-    public function getCreatedAt()
+    public function getCheckedAt()
     {
-        return $this->created_at;
+        return $this->checked_at;
     }
 
     /**

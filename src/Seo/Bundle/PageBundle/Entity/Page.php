@@ -4,6 +4,7 @@ namespace Seo\Bundle\PageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Seo\Bundle\PageBundle\Entity\Page
@@ -47,20 +48,22 @@ class Page
      * @var string $url
      *
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Url
      */
     protected $url;
 
     /**
      * @var string $title
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $title;
 
     /**
      * @var string $description
      *
-     * @ORM\Column(type="string", length=510)
+     * @ORM\Column(type="string", length=510, nullable=true)
      */
     protected $description;
 
@@ -82,6 +85,7 @@ class Page
 
     public function __construct()
     {
+        $this->is_active = true;
         $this->phrases = new \Doctrine\Common\Collections\ArrayCollection();
     }
 

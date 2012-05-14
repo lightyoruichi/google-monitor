@@ -14,6 +14,5 @@ set   :use_sudo,      false
 set   :keep_releases, 3
 
 set :shared_files,      ["app/config/parameters.ini"]
-set :shared_children,   [app_path + "/logs", web_path + "/uploads", "vendor"]
-set :update_vendors,    false
-
+set :shared_children,   [app_path + "/cache", app_path + "/logs", web_path + "/uploads", "vendor"]
+set :update_vendors,    true

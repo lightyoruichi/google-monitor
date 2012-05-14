@@ -5,6 +5,8 @@ namespace Seo\Bundle\PageBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Seo\Bundle\PhraseBundle\Entity\Phrase
  *
@@ -40,6 +42,8 @@ class Phrase
      * @var string $phrase
      *
      * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank()
      */
     protected $phrase;
 
@@ -178,6 +182,7 @@ class Phrase
 
     public function __construct()
     {
+        $this->is_active = true;
         $this->positions = new \Doctrine\Common\Collections\ArrayCollection();
     }
 

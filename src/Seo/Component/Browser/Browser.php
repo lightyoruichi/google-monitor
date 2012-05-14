@@ -22,8 +22,9 @@ class Browser extends Client
      */
     private $curl;
 
-    public function __construct(array $server = array(), History $history = null, CookieJar $cookieJar = null) {
-        parent::__construct($server,$history,$cookieJar);
+    public function __construct(array $server = array(), History $history = null, CookieJar $cookieJar = null)
+    {
+        parent::__construct($server, $history, $cookieJar);
         $this->curl = Curl::getInstance();
     }
 

@@ -17,7 +17,7 @@ use Seo\Bundle\PageBundle\Form\PageType;
 class PageController extends Controller
 {
     /**
-     * Lists all Page entities.
+     * Lists user pages
      *
      * @Route("/", name="pages")
      * @Template()
@@ -26,9 +26,11 @@ class PageController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('SeoPageBundle:Page')->findAll();
+        $user = $this->get('security.context')->getToken()->getUser();
 
-        return array('entities' => $entities);
+        $entities = $em->getRepository('SeoPageBundle:Page')->findByUser($user->getId());
+
+        return array('entities' => new \Doctrine\Common\Collections\ArrayCollection($entities));
     }
 
     /**
@@ -78,7 +80,11 @@ class PageController extends Controller
      */
     public function createAction()
     {
+        $user = $this->get('security.context')->getToken()->getUser();
+
         $entity = new Page();
+        $entity->setUser($user);
+
         $request = $this->getRequest();
         $form = $this->createForm(new PageType(), $entity);
         $form->bindRequest($request);

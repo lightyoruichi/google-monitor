@@ -10,7 +10,6 @@ class PhraseType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            ->add('is_active')
             ->add('phrase')
         ;
     }

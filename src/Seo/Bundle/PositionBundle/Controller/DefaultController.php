@@ -20,7 +20,7 @@ class DefaultController extends Controller
             throw new $this->createNotFoundException('Phrase entity not found');
         }
 
-        $d = new \DateTime('2011-01-01');
+        $d = new \DateTime('2010-01-01');
         $end = new \DateTime('2011-12-31');
 
         do {
@@ -32,7 +32,7 @@ class DefaultController extends Controller
             $pos = new \Seo\Bundle\PositionBundle\Entity\Position();
             $pos->setPhrase($phrase);
             $pos->setPosition(rand(1, 100));
-            $pos->setCreatedAt($d);
+            $pos->setCheckedAt($d);
 
             $em->persist($pos);
             $em->flush();
@@ -51,14 +51,21 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $phrase = $em->getRepository('SeoPageBundle:Phrase')->find($id);
+        $positions = $em->getRepository('SeoPositionBundle:Position')->findBy(
+            array(
+                'phrase' => $id
+            ),
+            array(
+                'checked_at' => 'asc' // ORDER BY CLAUSE
+            )
+        );
 
         $rowData = array();
 
         /* @var \Seo\Bundle\PositionBundle\Entity\Position $position */
-        foreach ($phrase->getPositions() as $position) {
+        foreach ($positions as $position) {
             $rowData[] = array(
-                $position->getCreatedAt()->getTimestamp() * 1000,
+                $position->getCheckedAt()->getTimestamp() * 1000,
                 $position->getPosition(),
             );
         }
@@ -78,29 +85,5 @@ class DefaultController extends Controller
 
         $response = $browser->getResponse();
         return new \Symfony\Component\HttpFoundation\Response($response->getContent());
-    }
-
-    /**
-     * @Route("/position/getTestData")
-     */
-    public function getTestDataAction()
-    {
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $positions = $em->getRepository('SeoPositionBundle:Position')->findAll();
-
-        $rowData = array();
-
-        /* @var \Seo\Bundle\PositionBundle\Entity\Position $position */
-        foreach ($positions as $position) {
-            $rowData[] = array(
-                $position->getCreatedAt()->getTimestamp() * 1000,
-                $position->getPosition(),
-            );
-        }
-
-        $jsonData = json_encode($rowData);
-
-        return new \Symfony\Component\HttpFoundation\Response($jsonData);
     }
 }

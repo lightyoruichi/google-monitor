@@ -15,20 +15,27 @@
     </tr>
     </thead>
     <tbody>
+    {% if entities.count > 0 %}
     {% for entity in entities %}
     <tr>
-        <td>{{ entity.isactive }}</td>
+        <td>{% if(entity.isactive) %}yes{% else %}no{% endif%}</td>
         <td><a href="{{ path('page_show', { 'id': entity.id }) }}">{{ entity.url }}</a></td>
         <td>{{ entity.title }}</td>
-        <td>{{ entity.description }}</td>
         <td>{% if entity.createdat %}{{ entity.createdat|date('Y-m-d H:i:s') }}{% endif %}</td>
         <td>{% if entity.updatedat %}{{ entity.updatedat|date('Y-m-d H:i:s') }}{% endif %}</td>
         <td>
-            <a href="{{ path('page_show', { 'id': entity.id }) }}">show</a>
-            <a href="{{ path('page_edit', { 'id': entity.id }) }}">edit</a>
+                <span class="btn-group">
+                    <a href="{{ path('page_show', { 'id': entity.id }) }}" class="btn">show</a>
+                    <a href="{{ path('page_edit', { 'id': entity.id }) }}" class="btn">edit</a>
+                </span>
         </td>
     </tr>
     {% endfor %}
+    {% else %}
+    <tr>
+        <td colspan="6">No results</td>
+    </tr>
+    {% endif %}
     </tbody>
 </table>
 

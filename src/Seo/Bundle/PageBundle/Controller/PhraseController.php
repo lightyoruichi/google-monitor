@@ -83,7 +83,7 @@ class PhraseController extends Controller
             $em->persist($phrase);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('phrase_show', array('id' => $phrase->getId())));
+            return $this->redirect($this->generateUrl('page_show', array('id' => $page->getId())));
         }
 
         return array(
@@ -96,7 +96,6 @@ class PhraseController extends Controller
      * Deletes a Phrase entity.
      *
      * @Route("/phrase/{id}/delete", name="phrase_delete")
-     * @Method("post")
      */
     public function deleteAction($id)
     {

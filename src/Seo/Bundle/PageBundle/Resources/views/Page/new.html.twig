@@ -5,16 +5,14 @@
 
 <form action="{{ path('page_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
+    <p class="form-actions btn-group">
+        <button type="submit" class="btn">
+            <i class="icon-plus"></i> Create
+        </button>
+        <a href="{{ path('pages') }}" class="btn">
+            Back to the list
+        </a>
     </p>
 </form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('pages') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
 {% endblock %}

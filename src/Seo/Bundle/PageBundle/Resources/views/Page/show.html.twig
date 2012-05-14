@@ -1,13 +1,91 @@
 {% extends 'SeoCoreBundle::layout.html.twig' %}
 
+{% block javascripts %}
+<script type="text/javascript" src="{{ asset('bundles/seocore/js/jquery-1.7.2.min.js') }}"></script>
+<script src="{{ asset('bundles/seopage/js/highstock.js') }}"></script>
+<script type="text/javascript">
+    // @TODO : przygotowanie wykresów pod wiele serii
+    $(function () {
+        var seriesOptions = [],
+                yAxisOptions = [],
+                seriesCounter = 0,
+                names = ['MSFT', 'AAPL', 'GOOG'],
+                colors = Highcharts.getOptions().colors;
+
+        $.each(names, function (i, name) {
+
+            $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=' + name.toLowerCase() + '-c.json&callback=?', function (data) {
+
+                seriesOptions[i] = {
+                    name:name,
+                    data:data
+                };
+
+                // As we're loading the data asynchronously, we don't know what order it will arrive. So
+                // we keep a counter and create the chart when all the data is loaded.
+                seriesCounter++;
+
+                if (seriesCounter == names.length) {
+                    createChart();
+                }
+            });
+        });
+
+
+        // create the chart when all data is loaded
+        function createChart() {
+
+            chart = new Highcharts.StockChart({
+                chart:{
+                    renderTo:'container'
+                },
+
+                rangeSelector:{
+                    selected:4
+                },
+
+                yAxis:{
+                    labels:{
+                        formatter:function () {
+                            return (this.value > 0 ? '+' : '') + this.value + '%';
+                        }
+                    },
+                    plotLines:[
+                        {
+                            value:0,
+                            width:2,
+                            color:'silver'
+                        }
+                    ]
+                },
+
+                plotOptions:{
+                    series:{
+                        compare:'percent'
+                    }
+                },
+
+                tooltip:{
+                    pointFormat:'<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
+                    valueDecimals:2
+                },
+
+                series:seriesOptions
+            });
+        }
+
+    });
+</script>
+{% endblock %}
+
 {% block container %}
-<h1 class="page-header">{{ entity.url }}</h1>
+<h1 class="page-header"><a href="{{ entity.url }}">{{ entity.url }}</a></h1>
 
 <table class="table table-bordered table-condensed">
     <tbody>
     <tr>
         <th>active?</th>
-        <td>{{ entity.isactive }}</td>
+        <td>{% if(entity.isactive) %}yes{% else %}no{% endif %}</td>
     </tr>
     <tr>
         <th>url</th>
@@ -32,22 +110,34 @@
     </tbody>
 </table>
 
-<h2>Phrases:</h2>
+<h3>Phrases:</h3>
+{% if entity.phrases.count > 0 %}
 <ul>
     {% for phrase in entity.phrases %}
     <li><a href="{{ path('phrase_show', { 'id' : phrase.id }) }}">{{ phrase.phrase }}</a></li>
     {% endfor %}
 </ul>
+{% else %}
+<p>No phrases for this site</p>
+{% endif %}
 
-<p class="btn-group">
-    <a href="{{ path('pages') }}" class="btn">
-        List
-    </a>
-    <a href="{{ path('page_edit', { 'id': entity.id }) }}" class="btn">
-        Edit
-    </a>
-    <a href="{{ path('page_delete', { 'id': entity.id }) }}" class="btn">
-        Delete
-    </a>
-</p>
+<h3>Positions:</h3>
+<div class="chart"><pre>tutaj bedzie wyrkes</pre></div>
+
+<div class="form-actions">
+    <p class="btn-group">
+        <a href="{{ path('phrase_new', { 'page_id': entity.id })}}" class="btn">
+            <i class="icon-plus"></i> Add phrase
+        </a>
+        <a href="{{ path('pages') }}" class="btn">
+            Back to list
+        </a>
+        <a href="{{ path('page_edit', { 'id': entity.id }) }}" class="btn">
+            Edit
+        </a>
+        <a href="{{ path('page_delete', { 'id': entity.id }) }}" class="btn">
+            Delete
+        </a>
+    </p>
+</div>
 {% endblock %}

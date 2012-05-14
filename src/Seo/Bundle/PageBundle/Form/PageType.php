@@ -10,10 +10,7 @@ class PageType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            ->add('is_active')
             ->add('url')
-            ->add('title')
-            ->add('description')
         ;
     }
 

@@ -2,7 +2,7 @@
 
 {% block javascripts %}
 <script type="text/javascript" src="{{ asset('bundles/seocore/js/jquery-1.7.2.min.js') }}"></script>
-<script src="http://code.highcharts.com/stock/highstock.js"></script>
+<script src="{{ asset('bundles/seopage/js/highstock.js') }}"></script>
 <script type="text/javascript">
     $(function () {
         $.getJSON('/app_dev.php/phrase/{{ entity.id }}/positions', function (data) {
@@ -42,11 +42,11 @@
 
 <div id="chart"></div>
 
-<div class="btn-group">
+<div class="form-actions btn-group">
     <a href="{{ path('page_show', { 'id' : entity.page.id }) }}" class="btn">
         Back
     </a>
-    <a href="{{ path('phrase_delete', { 'id': entity.id }) }}" class="btn btn-danger">
+    <a href="{{ path('phrase_delete', { 'id': entity.id }) }}" class="btn">
         Delete
     </a>
 </div>
