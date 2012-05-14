@@ -10,6 +10,7 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/dashboard", name="dashboard")
+     * @Route("/", name="main")
      * @Template
      */
     public function dashboardAction()

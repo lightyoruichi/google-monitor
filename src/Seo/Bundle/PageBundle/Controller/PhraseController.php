@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Seo\Bundle\PageBundle\Entity\Phrase;
 use Seo\Bundle\PageBundle\Form\PhraseType;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 
 /**
  * Phrase controller.
@@ -21,6 +22,7 @@ class PhraseController extends Controller
      *
      * @Route("/phrase/{id}/show", name="phrase_show")
      * @Template()
+     * @Secure(roles="ROLE_USER")
      */
     public function showAction($id)
     {
@@ -42,6 +44,7 @@ class PhraseController extends Controller
      *
      * @Route("/page/{page_id}/phrase/add", name="phrase_new")
      * @Template()
+     * @Secure(roles="ROLE_USER")
      */
     public function newAction($page_id)
     {
@@ -62,6 +65,7 @@ class PhraseController extends Controller
      * @Route("/page/{page_id}/phrase/create", name="phrase_create")
      * @Method("post")
      * @Template("SeoPageBundle:Phrase:new.html.twig")
+     * @Secure(roles="ROLE_USER")
      */
     public function createAction($page_id)
     {
@@ -96,6 +100,7 @@ class PhraseController extends Controller
      * Deletes a Phrase entity.
      *
      * @Route("/phrase/{id}/delete", name="phrase_delete")
+     * @Secure(roles="ROLE_USER")
      */
     public function deleteAction($id)
     {

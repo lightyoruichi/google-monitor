@@ -11,7 +11,8 @@ framework:
     form:            true
     csrf_protection: true
     validation:      { enable_annotations: true }
-    templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
+    templating:      { engines: ['twig'] }
+    #assets_version: SomeVersionScheme
     session:
         default_locale: %locale%
         auto_start:     true
@@ -45,7 +46,7 @@ doctrine:
         dbname:   %database_name%
         user:     %database_user%
         password: %database_password%
-        charset:  UTF8
+        charset:  utf8
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%

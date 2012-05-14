@@ -8,11 +8,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Seo\Bundle\PageBundle\Entity\Page;
 use Seo\Bundle\PageBundle\Form\PageType;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 
 /**
  * Page controller.
  *
  * @Route("/page")
+ * @Secure(roles="ROLE_USER")
  */
 class PageController extends Controller
 {
@@ -21,6 +23,7 @@ class PageController extends Controller
      *
      * @Route("/", name="pages")
      * @Template()
+     * @Secure(roles="ROLE_USER")
      */
     public function indexAction()
     {
@@ -38,6 +41,7 @@ class PageController extends Controller
      *
      * @Route("/{id}/show", name="page_show")
      * @Template()
+     * @Secure(roles="ROLE_USER")
      */
     public function showAction($id)
     {
@@ -59,6 +63,7 @@ class PageController extends Controller
      *
      * @Route("/new", name="page_new")
      * @Template()
+     * @Secure(roles="ROLE_USER")
      */
     public function newAction()
     {
@@ -77,6 +82,7 @@ class PageController extends Controller
      * @Route("/create", name="page_create")
      * @Method("post")
      * @Template("SeoPageBundle:Page:new.html.twig")
+     * @Secure(roles="ROLE_USER")
      */
     public function createAction()
     {
@@ -109,6 +115,7 @@ class PageController extends Controller
      *
      * @Route("/{id}/edit", name="page_edit")
      * @Template()
+     * @Secure(roles="ROLE_USER")
      */
     public function editAction($id)
     {
@@ -134,6 +141,7 @@ class PageController extends Controller
      * @Route("/{id}/update", name="page_update")
      * @Method("post")
      * @Template("SeoPageBundle:Page:edit.html.twig")
+     * @Secure(roles="ROLE_USER")
      */
     public function updateAction($id)
     {
@@ -168,6 +176,7 @@ class PageController extends Controller
      * Deletes a Page entity.
      *
      * @Route("/{id}/delete", name="page_delete")
+     * @Secure(roles="ROLE_USER")
      */
     public function deleteAction($id)
     {

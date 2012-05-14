@@ -29,17 +29,20 @@ class DefaultController extends Controller
 
             $d->setTime($h, $m);
 
+            $checked_at = clone $d;
+
             $pos = new \Seo\Bundle\PositionBundle\Entity\Position();
             $pos->setPhrase($phrase);
             $pos->setPosition(rand(1, 100));
-            $pos->setCheckedAt($d);
+            $pos->setCheckedAt($checked_at);
 
             $em->persist($pos);
-            $em->flush();
 
             $d->modify('+1 day');
 
         } while ($d < $end);
+
+        $em->flush();
 
         return new \Symfony\Component\HttpFoundation\Response('Imported OK');
     }
