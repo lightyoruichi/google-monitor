@@ -16,10 +16,29 @@
                     <li><a href="{{ path('dashboard') }}">Dashboard</a></li>
                     <li><a href="{{ path('pages') }}">My Sites</a></li>
                     <li><a href="{{ path('page_new') }}">Add new Site</a></li>
-                    <li><a href="{{ path('fos_user_profile_show') }}">My account</a></li>
                 </ul>
             </div>
             <!--/.nav-collapse -->
+
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <div class="btn-group pull-right">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-user"></i> {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ path('fos_user_profile_show') }}">Profile</a></li>
+                    <li class="divider"></li>
+                    <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+                </ul>
+            </div>
+            {% else %}
+            <ul class="nav pull-right">
+                <li>
+                    <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                </li>
+            </ul>
+            {% endif %}
         </div>
     </div>
 </div>

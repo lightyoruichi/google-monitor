@@ -11,7 +11,7 @@ class DefaultController extends Controller
     /**
      * @Route("/phrase/{id}/fixtures")
      */
-    public function loadDefaultsAction($id)
+    public function loadDefaults($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
         $phrase = $em->getRepository('SeoPageBundle:Phrase')->find($id);
@@ -83,10 +83,8 @@ class DefaultController extends Controller
      */
     public function test()
     {
-        $browser = new \Seo\Component\Browser\Browser();
-        $browser->request('GET','http://www.supremumseo.pl');
+        $g = new \Seo\Component\Google\Google();
+        var_dump($g->getResults()); die;
 
-        $response = $browser->getResponse();
-        return new \Symfony\Component\HttpFoundation\Response($response->getContent());
     }
 }
