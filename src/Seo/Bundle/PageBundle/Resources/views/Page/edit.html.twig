@@ -1,10 +1,66 @@
 {% extends 'SeoCoreBundle::layout.html.twig' %}
 
+{% block javascripts %}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        // Get the div that holds the collection of tags
+        var collectionHolder = $('div.phrases');
+
+        // setup an "add a tag" link
+        var $addPhraseLink = $('<a href="#" class="btn">Add a phrase</a>');
+        var $newLinkLi = $('<div></div>').append($addPhraseLink);
+
+        // add the "add a tag" anchor and li to the tags ul
+        collectionHolder.append($newLinkLi);
+
+        $addPhraseLink.on('click', function (e) {
+            // prevent the link from creating a "#" on the URL
+            e.preventDefault();
+
+            // add a new tag form (see next code block)
+            addPhraseForm(collectionHolder, $newLinkLi);
+        });
+    });
+
+    function addPhraseForm(collectionHolder, $newLinkLi) {
+        // Get the data-prototype we explained earlier
+        var prototype = collectionHolder.attr('data-prototype');
+
+        // Replace '$$name$$' in the prototype's HTML to
+        // instead be a number based on the current collection's length.
+        var newForm = prototype.replace(/\$\$name\$\$/g, collectionHolder.children().length);
+
+        // Display the form in the page in an li, before the "Add a tag" link li
+        var innerCtrl = $('<div class="controls"></div>').append(newForm);
+        $newLinkLi.before($('<div class="control-group"></div>').append(innerCtrl));
+    }
+</script>
+{% endblock %}
+
 {% block container %}
 <h1 class="page-header">Edit page</h1>
 
 <form action="{{ path('page_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
+
+    {{ form_row(edit_form.url) }}
+
+    <h3>{{ form_label(edit_form.phrases) }}</h3>
+
+    <div class="phrases" data-prototype="{{ form_widget(edit_form.phrases.get('prototype').phrase) | e }}">
+        {% for phrase in edit_form.phrases %}
+        <div class="control-group{% if phrase.phrase.vars.errors|length > 0 %} error{% endif %}">
+            <div class="controls">
+                {{ form_widget(phrase.phrase) }}
+                {{ form_errors(phrase.phrase) }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {{ form_row(edit_form._token) }}
+
     <p class="form-actions">
         <button type="submit" class="btn btn-success">
             Save
@@ -17,4 +73,5 @@
         </a>
     </p>
 </form>
+
 {% endblock %}

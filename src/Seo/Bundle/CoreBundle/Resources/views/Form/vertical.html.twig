@@ -4,8 +4,8 @@
 {% block field_row %}
 <div class="control-group{% if errors|length > 0 %} error{% endif %}">
     {{ form_label(form) }}
-    {{ form_errors(form) }}
     {{ form_widget(form, { 'attr' : {'class':'span6'} }) }}
+    {{ form_errors(form) }}
 </div>
 {% endblock field_row %}
 
@@ -20,7 +20,7 @@
 {% spaceless %}
 {% if errors|length > 0 %}
 {% for error in errors %}
-<p class="help-block">{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</p>
+<p class="help-inline">{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</p>
 {% endfor %}
 {% endif %}
 {% endspaceless %}

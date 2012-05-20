@@ -3,6 +3,7 @@
 namespace Seo\Bundle\PageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -31,7 +32,7 @@ class Page
     protected $user;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection() $phrases;
+     * @var ArrayCollection $phrases;
      *
      * @ORM\OneToMany(targetEntity="Phrase", mappedBy="page", cascade={"persist"})
      */
@@ -86,7 +87,7 @@ class Page
     public function __construct()
     {
         $this->is_active = true;
-        $this->phrases = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->phrases = new ArrayCollection();
     }
 
     public function __toString()
@@ -237,7 +238,7 @@ class Page
     /**
      * Get phrases
      *
-     * @return Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getPhrases()
     {
@@ -247,9 +248,9 @@ class Page
     /**
      * Set phrases
      *
-     * @param \Doctrine\Common\Collections\ArrayCollection $phrases
+     * @param ArrayCollection $phrases
      */
-    public function setPhrases(\Doctrine\Common\Collections\ArrayCollection $phrases)
+    public function setPhrases( $phrases)
     {
         foreach ($phrases as $phrase)
         {
