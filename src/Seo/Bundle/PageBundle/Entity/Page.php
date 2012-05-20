@@ -33,7 +33,7 @@ class Page
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection() $phrases;
      *
-     * @ORM\OneToMany(targetEntity="Phrase", mappedBy="page")
+     * @ORM\OneToMany(targetEntity="Phrase", mappedBy="page", cascade={"persist"})
      */
     protected $phrases;
 
@@ -242,6 +242,21 @@ class Page
     public function getPhrases()
     {
         return $this->phrases;
+    }
+
+    /**
+     * Set phrases
+     *
+     * @param \Doctrine\Common\Collections\ArrayCollection $phrases
+     */
+    public function setPhrases(\Doctrine\Common\Collections\ArrayCollection $phrases)
+    {
+        foreach ($phrases as $phrase)
+        {
+            $phrase->setPage($this);
+        }
+
+        $this->phrases = $phrases;
     }
 
     /**

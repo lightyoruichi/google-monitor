@@ -11,6 +11,22 @@
     </tr>
     <tr>
         <th>
+            {{ 'profile.show.firstName'|trans({}, 'FOSUserBundle') }}
+        </th>
+        <td>
+            {{ user.firstName }}
+        </td>
+    </tr>
+    <tr>
+        <th>
+            {{ 'profile.show.lastName'|trans({}, 'FOSUserBundle') }}
+        </th>
+        <td>
+            {{ user.lastName }}
+        </td>
+    </tr>
+    <tr>
+        <th>
             {{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}
         </th>
         <td>
@@ -18,3 +34,9 @@
         </td>
     </tr>
 </table>
+
+<div class="form-actions">
+    <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-primary">
+        {{ 'profile.show.edit'|trans }}
+    </a>
+</div>

@@ -83,8 +83,31 @@ class DefaultController extends Controller
      */
     public function test()
     {
-        $g = new \Seo\Component\Google\Google();
-        var_dump($g->getResults()); die;
+        $em = $this->getDoctrine()->getEntityManager();
 
+        $page = new \Seo\Bundle\PageBundle\Entity\Page();
+        $page->setTitle('test 1');
+        $page->setUrl('http://www.onet.pl');
+
+        $em->persist($page);
+        $em->flush();
+
+        sleep(1);
+
+        $page->setTitle('test');
+        $em->merge($page);
+        $em->flush();
+
+        die;
+
+        $phrase = new \Seo\Bundle\PageBundle\Entity\Phrase();
+        $phrase->setPhrase('test 1');
+        $phrase->setPage($page);
+
+        $em->persist($phrase);
+        $em->flush();
+
+
+        return new \Symfony\Component\HttpFoundation\Response();
     }
 }

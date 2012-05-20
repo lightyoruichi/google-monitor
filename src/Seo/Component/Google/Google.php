@@ -12,13 +12,16 @@ class Google
      */
     protected $results;
 
+    protected $phrase;
+
     /**
      * @var \Symfony\Component\BrowserKit\Response $response
      */
     protected $response;
 
-    public function __construct()
+    public function __construct($phrase)
     {
+        $this->phrase = $phrase;
         $this->results = array();
         $this->request();
     }
@@ -26,7 +29,7 @@ class Google
     protected function request()
     {
         $b = new Browser();
-        $b->request('GET','http://www.google.com/search?ie=UTF-8&oe=UTF-8&q=tekiela+wojtek');
+        $b->request('GET','http://www.google.com/search?ie=UTF-8&oe=UTF-8&q='.urlencode($this->phrase));
         $this->response = $b->getResponse();
     }
 

@@ -75,5 +75,7 @@ fos_user:
     user_class: Seo\Bundle\UserBundle\Entity\User
     registration:
         confirmation:
-            enabled:    false
+            enabled:    true
             template:   FOSUserBundle:Registration:email.txt.twig
+        form:
+            type:       seo_user_registration

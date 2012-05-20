@@ -22,6 +22,20 @@ class User extends BaseUser
     protected $id;
 
     /**
+     * @var string $firstName;
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $firstName;
+
+    /**
+     * @var string $lastName;
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $lastName;
+
+    /**
      * @var \Doctrine\Common\Collections\ArrayCollection() $pages;
      *
      * @ORM\OneToMany(targetEntity="Seo\Bundle\PageBundle\Entity\Page", mappedBy="user")
@@ -118,5 +132,45 @@ class User extends BaseUser
     public function getPages()
     {
         return $this->pages;
+    }
+
+    /**
+     * Set first name
+     *
+     * @param string $firstName
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * Get first name
+     *
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set last name
+     *
+     * @param string $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * Get last name
+     *
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
     }
 }

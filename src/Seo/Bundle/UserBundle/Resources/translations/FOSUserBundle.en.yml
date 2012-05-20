@@ -1,0 +1,7 @@
+fos_user_registration_form_firstName: "First Name"
+fos_user_registration_form_lastName:  "Last Name"
+
+profile:
+  show:
+    firstName: "First Name"
+    lastName:  "Last Name"

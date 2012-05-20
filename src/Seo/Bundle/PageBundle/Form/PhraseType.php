@@ -14,6 +14,13 @@ class PhraseType extends AbstractType
         ;
     }
 
+    public function getDefaultOptions(array $options)
+    {
+        return array(
+            'data_class' => 'Seo\Bundle\PageBundle\Entity\Phrase',
+        );
+    }
+
     public function getName()
     {
         return 'seo_bundle_pagebundle_phrasetype';

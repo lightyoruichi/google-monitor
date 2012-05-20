@@ -3,7 +3,7 @@
 {% block container %}
 
 {% for key, message in app.session.getFlashes() %}
-<div class="alert alert-{{ key }}">
+<div class="alert alert-{{ alertkey(key) }}">
     {{ message|trans({}, 'FOSUserBundle') }}
 </div>
 {% endfor %}

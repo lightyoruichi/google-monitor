@@ -1,8 +1,21 @@
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="seo_user.registration.form.type" class="Seo\Bundle\UserBundle\Form\RegistrationFormType">
+            <tag name="form.type" alias="seo_user_registration"/>
+            <argument>%fos_user.model.user.class%</argument>
+        </service>
+
+        <service id="seo.twig.seo_extension" class="Seo\Bundle\UserBundle\Twig\SeoExtension">
+            <tag name="twig.extension"/>
+        </service>
+
+    </services>
 
     <!--
     <parameters>

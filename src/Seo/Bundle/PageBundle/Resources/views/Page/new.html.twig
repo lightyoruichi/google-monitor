@@ -1,10 +1,60 @@
 {% extends 'SeoCoreBundle::layout.html.twig' %}
 
+{% block javascripts %}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        // Get the div that holds the collection of tags
+        var collectionHolder = $('ul.phrases');
+
+        // setup an "add a tag" link
+        var $addPhraseLink = $('<a href="#" class="add_phrase_link">Add a phrase</a>');
+        var $newLinkLi = $('<li></li>').append($addPhraseLink);
+
+        // add the "add a tag" anchor and li to the tags ul
+        collectionHolder.append($newLinkLi);
+
+        $addPhraseLink.on('click', function (e) {
+            // prevent the link from creating a "#" on the URL
+            e.preventDefault();
+
+            // add a new tag form (see next code block)
+            addPhraseForm(collectionHolder, $newLinkLi);
+        });
+    });
+
+    function addPhraseForm(collectionHolder, $newLinkLi) {
+        // Get the data-prototype we explained earlier
+        var prototype = collectionHolder.attr('data-prototype');
+
+        // Replace '$$name$$' in the prototype's HTML to
+        // instead be a number based on the current collection's length.
+        var newForm = prototype.replace(/\$\$name\$\$/g, collectionHolder.children().length);
+
+        // Display the form in the page in an li, before the "Add a tag" link li
+        var $newFormLi = $('<li></li>').append(newForm);
+        $newLinkLi.before($newFormLi);
+    }
+</script>
+{% endblock %}
+
 {% block container %}
 <h1 class="page-header">Add a page</h1>
 
 <form action="{{ path('page_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
+    {{ form_row(form.url) }}
+
+    <h3>Phrases</h3>
+
+    <ul class="phrases" data-prototype="{{ form_widget(form.phrases.get('prototype').phrase) | e }}">
+        {% for phrase in form.phrases %}
+        <li>{{ form_row(phrase.phrase) }}</li>
+        {% endfor %}
+    </ul>
+
+    {{ form_rest(form) }}
+
     <p class="form-actions btn-group">
         <button type="submit" class="btn">
             <i class="icon-plus"></i> Create
