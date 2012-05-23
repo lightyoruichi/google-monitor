@@ -14,23 +14,27 @@ class Google
 
     protected $phrase;
 
+    protected $browser;
+
     /**
      * @var \Symfony\Component\BrowserKit\Response $response
      */
     protected $response;
 
-    public function __construct($phrase)
+    public function __construct($phrase, Browser $b)
     {
         $this->phrase = $phrase;
+        $this->browser = $b;
+
         $this->results = array();
+
         $this->request();
     }
 
     protected function request()
     {
-        $b = new Browser();
-        $b->request('GET','http://www.google.com/search?ie=UTF-8&oe=UTF-8&q='.urlencode($this->phrase));
-        $this->response = $b->getResponse();
+        $this->browser->request('GET','http://www.google.com/search?ie=UTF-8&oe=UTF-8&q='.urlencode($this->phrase));
+        $this->response = $this->browser->getResponse();
     }
 
     public function getResults()

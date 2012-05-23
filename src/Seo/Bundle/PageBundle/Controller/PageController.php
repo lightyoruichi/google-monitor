@@ -68,6 +68,8 @@ class PageController extends Controller
     public function newAction()
     {
         $entity = new Page();
+        $phrase = new \Seo\Bundle\PageBundle\Entity\Phrase();
+        $entity->addPhrase($phrase);
         $form = $this->createForm(new PageType(), $entity);
 
         return array(
