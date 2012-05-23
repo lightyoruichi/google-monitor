@@ -1,0 +1,9 @@
+{% extends 'SeoCoreBundle::layout.html.twig' %}
+
+{% block container %}
+
+{% for result in results %}
+        {{ result.title }}<br />
+{% endfor %}
+
+{% endblock %}

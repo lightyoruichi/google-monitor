@@ -18,6 +18,10 @@ SeoUserBundle:
     type:     annotation
     prefix:   /
 
+homepage:
+    pattern:   /
+    defaults:  { _controller: SeoPageBundle:Page:index }
+
 # FOS User Bundle
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

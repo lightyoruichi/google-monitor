@@ -14,7 +14,6 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
  * Page controller.
  *
  * @Route("/page")
- * @Secure(roles="ROLE_USER")
  */
 class PageController extends Controller
 {
